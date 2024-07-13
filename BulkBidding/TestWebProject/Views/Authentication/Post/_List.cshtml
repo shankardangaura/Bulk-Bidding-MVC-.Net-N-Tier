@@ -1,0 +1,49 @@
+﻿@model IEnumerable<BRDataModels.Post>
+
+<table class="table table-vcenter card-table">
+    <thead>
+        <tr>
+            <th>Name</th>
+            <th>Title</th>
+            <th>Role</th>
+            <th class="w-1"></th>
+        </tr>
+    </thead>
+    <tbody>
+        @if (Model.Any())
+        {
+            @foreach(var post in Model)
+            {
+                <tr>
+                    <td>
+                        <div class="d-flex py-1 align-items-center">
+                            <span class="avatar me-2" style="background-image: url(./static/avatars/006m.jpg)"></span>
+                            <div class="flex-fill">
+                                <div class="font-weight-medium">@post.PostTitle</div>
+                                <div class="text-muted"><a href="#" class="text-reset">lmiona@livejournal.com</a></div>
+                            </div>
+                        </div>
+                    </td>
+                    <td>
+                        <div>@post.PostDescription</div>
+                        <div class="text-muted">Accounting</div>
+                    </td>
+                    <td class="text-muted">
+                        @post.PostOn
+                    </td>
+                    <td>
+                        <a href="#">Edit</a>
+                    </td>
+                </tr>
+            }
+        }
+        else
+        {
+            <tr>
+                <td>
+                    No data to show...
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>

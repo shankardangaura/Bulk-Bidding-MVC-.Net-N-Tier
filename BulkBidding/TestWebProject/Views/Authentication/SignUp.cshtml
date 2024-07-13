@@ -1,0 +1,67 @@
+﻿@model BRDataModels.SignUpViewModal
+@{
+    Layout = null;
+}
+<title>Sign up - Bulk Bidding</title>
+<!-- CSS files -->
+<link href="~/css/tabler.min.css?1684106062" rel="stylesheet" />
+<link href="~/css/tabler-flags.min.css?1684106062" rel="stylesheet" />
+<link href="~/css/tabler-payments.min.css?1684106062" rel="stylesheet" />
+<link href="~/css/tabler-vendors.min.css?1684106062" rel="stylesheet" />
+<link href="~/css/demo.min.css?1684106062" rel="stylesheet" />
+<link href="~/css/inter.css" rel="stylesheet" />
+<script src="~/js/tabler.min.js?1684106062" defer></script>
+<script src="~/js/demo.min.js?1684106062" defer></script>
+<script src="~/js/demo-theme.min.js?1684106062"></script>
+<style>
+    :root {
+        --tblr-font-sans-serif: 'Inter Var', -apple-system, BlinkMacSystemFont, San Francisco, Segoe UI, Roboto, Helvetica Neue, sans-serif;
+    }
+
+    body {
+        font-feature-settings: "cv03", "cv04", "cv11";
+    }
+</style>
+
+<div class="page page-center">
+    <div class="container container-tight py-4">
+        <form class="card card-md" id="signup" autocomplete="off" novalidate>
+            <div class="card-body">
+                <h2 class="card-title text-center mb-4" style="color:#464cfa">Create Bulk Bidding Account</h2>
+                <div class="form-footer">
+                    <a class="btn btn-primary w-100" onclick="location.href='@Url.Action("SignUpIndividual","Authentication")'">SignUp As Individual</a>
+                </div>
+                <div class="form-footer">
+                    <a class="btn btn-primary w-100" onclick="location.href='@Url.Action("SignUpCompany","Authentication")'">SignUp As Company</a>
+                </div>
+                <div class="text-center text-muted mt-3">
+                    Already have account? <a class="tox-button--naked" onclick="location.href='@Url.Action("Login","Authentication")'" tabindex="-1" style="font-style:italic;color:#464cfa;">Sign in</a>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
+<script type="text/javascript">
+    $(document).ready(function () {
+        GetUserList();
+    })
+    function ResgisterUser(formid) {
+        var formData = $("#" + formid).serialize()
+        $.ajax({
+            type: 'GET',
+            url: '@Url.Action("Individual", "Authentication")',
+            data: formData,
+            success: function (response) {
+                if (response != "0") {
+                    alert("Account is created successfully");
+                    // Redirect to the login page upon successful registration
+                    window.location.href = '@Url.Action("Login", "Authentication")';
+                }
+            },
+            error: function (error) {
+                alert("No records found");
+            }
+        });
+        return false;
+    }
+</script>

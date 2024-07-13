@@ -1,0 +1,67 @@
+﻿@model BRDataModels.Post
+@{
+    Layout = "~/Views/Shared/_LayoutV1.cshtml";
+    var _name = ViewBag.UserName;
+}
+<div class="page-header d-print-none">
+    <div class="container-xl">
+        <div class="row g-2 align-items-center">
+            <div class="col">
+                <h2 class="page-title">
+                    @_name
+                </h2>
+            </div>
+        </div>
+        <form asp-action="postCreate" method="post" class="card" id="signupCompany" autocomplete="off" novalidate>
+            <div class="card-body">
+                <h2 class="card-title text-center " style="color:#464cfa">New Post:</h2>
+
+                    @Html.HiddenFor(x => x.Id)
+                    <label class="form-label">Title</label>
+                    <input asp-for="PostTitle" class="form-control" placeholder="Enter title" />
+              
+                    <label class="form-label">Description</label>
+                    <input asp-for="PostDescription" class="form-control" placeholder="Enter title description" />
+                    &nbsp;
+                <div>
+                    <button type="submit" class="btn btn-primary w-100">Post Status</button>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
+
+@* <div class="page page-top">
+    <div class="container container-tight py">
+        
+    </div>
+</div> *@
+<div class="modal modal-blur fade" id="modal-team" tabindex="-1" style="display: none;" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+            
+        </div>
+    </div>
+</div>
+
+<div class="col-12">
+    <div class="card">
+        <div class="table-responsive" id="postData">
+            
+        </div>
+    </div>
+</div>
+<script>
+    $(document).ready(function () {
+        $.ajax({
+            type: 'get',
+            url: '/Authentication/GetPostDetail',
+            data: { "userId": 0 },
+            success: function (response) {
+                $("#postData").html(response);
+            }
+
+        });
+        return false;
+    });
+</script>
